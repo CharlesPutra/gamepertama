@@ -4,7 +4,7 @@ body{
 #main{
     width: 400px; /* Lebar sesuai viewport */
       height: 500px; 
-    background: url("img/background.png");
+    background: url("background.png");
     margin: 0 auto;
     object-fit: cover;
 
@@ -19,7 +19,7 @@ body{
 #plane{
     width: 58px;
     height: 58px;
-    background: url("img/plane.png");
+    background: url("plane.png");
     background-size: 100%;
     position: absolute;
     margin-top: 300px;
@@ -27,6 +27,6 @@ body{
 #meteor{
     width: 58px;
     height: 58px;
-    background: url("img/meteor.png");
+    background: url("meteor.png");
     background-size: 100%;
 }
