@@ -1,0 +1,32 @@
+body{
+    text-align: center;
+}
+#main{
+    width: 400px; /* Lebar sesuai viewport */
+      height: 500px; 
+    background: url("img/background.png");
+    margin: 0 auto;
+    object-fit: cover;
+
+}
+#area{
+    width: 400px;
+    height: 500px;
+    position: absolute;
+    overflow: hidden;
+    z-index: 100;
+}
+#plane{
+    width: 58px;
+    height: 58px;
+    background: url("img/plane.png");
+    background-size: 100%;
+    position: absolute;
+    margin-top: 300px;
+}
+#meteor{
+    width: 58px;
+    height: 58px;
+    background: url("img/meteor.png");
+    background-size: 100%;
+}
