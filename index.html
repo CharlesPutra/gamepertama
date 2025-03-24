@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,11 +9,20 @@
 <body>
     <h1>Plane Space</h1>
     <h3>Score : <span id="score">0</span></h3>
+
     <div id="main" style="background-position-y: 0;">
         <div id="area">
             <div id="plane" style="margin-left: 130px; margin-top: 400px;"></div>
             <div id="meteor" style="margin-top: 600px;"></div>
         </div>
+    </div>
+
+    <!-- Tombol Kontrol -->
+    <div class="controls">
+        <button onclick="movePlane('up')">⬆️</button><br>
+        <button onclick="movePlane('left')">⬅️</button>
+        <button onclick="movePlane('down')">⬇️</button>
+        <button onclick="movePlane('right')">➡️</button>
     </div>
 
     <script type="text/javascript">
@@ -22,28 +31,22 @@
 
         function setBackgroundMoving() {
             if(isMoving == true) {
-            setTimeout(function(){
-                //setting background berjalan
-                var bg = document.getElementById('main');
-                bg.style.backgroundPositionY = (parseInt(bg.style.backgroundPositionY.replace('px','')) + 1) + 'px';
+                setTimeout(function(){
+                    var bg = document.getElementById('main');
+                    bg.style.backgroundPositionY = (parseInt(bg.style.backgroundPositionY.replace('px','')) + 1) + 'px';
 
-                //update score
-                document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML) + 1;
+                    document.getElementById('score').innerHTML = parseInt(document.getElementById('score').innerHTML) + 1;
 
-                //paggil recursive set background moving
-                setBackgroundMoving();
-            },5);
+                    setBackgroundMoving();
+                }, 5);
+            }
         }
-        }
-        //inisialisasi background  berjalannya
+
         setBackgroundMoving();
 
-
-
-        //setting meteor berjalan
         function setMeteorMoving() {
             var meteor = document.getElementById('meteor');
-           var plane = document.getElementById('plane');
+            var plane = document.getElementById('plane');
 
             setTimeout(function() {
                 meteor.style.marginTop = (parseInt(meteor.style.marginTop.replace('px','')) + 1) + 'px';
@@ -55,47 +58,53 @@
                 if(meteor.offsetTop + 56 >= plane.offsetTop && meteor.offsetLeft + 50 >= plane.offsetLeft && meteor.offsetTop + 56 <= plane.offsetTop + 100 && meteor.offsetLeft <= plane.offsetLeft + 50) {
                     alert('Game Over, Score Anda :' + document.getElementById('score').innerHTML);
                     isMoving = false;
-                    
-                }else {
-                    //panggil gerakan meteor
+                } else {
                     setMeteorMoving();
                 }
 
             }, 1);
         }
-        //inisialisasi meteor
+
         setMeteorMoving();
 
-        //setting berjalannya plane
-        window.addEventListener('keydown', function(e) {
+        function movePlane(direction) {
             var plane = document.getElementById('plane');
-            atas = parseInt(plane.style.marginTop.replace('px',''));
-            left = parseInt(plane.style.marginLeft.replace('px',''));
-            // keycode plane Bawah = 40 ,atas = 38 ,kiri = 37 ,kanan = 39
+            let atas = parseInt(plane.style.marginTop.replace('px',''));
+            let left = parseInt(plane.style.marginLeft.replace('px',''));
 
-            
-            //validasi jalan plane
-            if(isMoving == true){
-            if(e.keyCode == 37) {
-                if(left > 0) {
+            if (isMoving == true) {
+                if (direction == 'left' && left > 0) {
                     plane.style.marginLeft = (left - 10) + 'px';
-                }
-            }else if(e.keyCode == 38) {
-                if(atas > 0) {
+                } else if (direction == 'up' && atas > 0) {
                     plane.style.marginTop = (atas - 10) + 'px';
-                }
-            }else if(e.keyCode == 39) {
-                if(left < 340) {
+                } else if (direction == 'right' && left < 340) {
                     plane.style.marginLeft = (left + 10) + 'px';
-                }
-            }else if(e.keyCode == 40) {
-                if(atas < 440) {
+                } else if (direction == 'down' && atas < 440) {
                     plane.style.marginTop = (atas + 10) + 'px';
                 }
             }
         }
 
+        window.addEventListener('keydown', function(e) {
+            if (e.keyCode == 37) movePlane('left');
+            else if (e.keyCode == 38) movePlane('up');
+            else if (e.keyCode == 39) movePlane('right');
+            else if (e.keyCode == 40) movePlane('down');
         });
+
     </script>
+
+    <style>
+        .controls {
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+    </style>
+
 </body>
 </html>
